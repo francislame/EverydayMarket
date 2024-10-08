@@ -1,0 +1,18 @@
+.container {
+  display: inline;
+  border: 2px solid;
+  border-color: steelblue;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  cursor: pointer;
+  
+}
+
+.container:hover {
+  background-color: lightgray;
+}
+
+.selected {
+  background-color: bisque;
+}

@@ -1,0 +1,7 @@
+  <ul>
+    <li *ngFor="let category of categories"
+        (click)="onCategorySelected(category.name)"
+        [class.selected]="category.name === selectedCategoryName">
+      {{ category.name }}
+    </li>
+  </ul>

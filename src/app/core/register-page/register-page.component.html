@@ -1,0 +1,125 @@
+<h1> REGISTRATION </h1>
+
+<form #registerForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+
+
+  <!-- NAME -->
+  <label for="name">Name:</label>
+  <input id="name"
+         type="text"
+         class="form-control"
+         required
+         minlength="5"
+         pattern="^[a-zA-Z\s]+$"
+         [(ngModel)]="model.name"
+         name="name"
+         #name="ngModel"
+         [customValidator]="'namePattern'"
+         [ngClass]="{ 'is-invalid': name.touched && name.invalid }"
+         />
+
+
+  <!-- EMAIL ADDRESS -->
+  <label for="email">Email address:</label>
+  <input id="email"
+         type="email"
+         class="form-control"
+         required
+         pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+         [(ngModel)]="model.email"
+         name="email"
+         #email="ngModel"
+         [ngClass]="{ 'is-invalid': email.touched && email.invalid }"
+         />
+
+
+  <!-- PHONE NUMBER -->
+  <label for="phone">Phone Number:</label>
+  <input id="phone"
+         type="text"
+         class="form-control"
+         required
+         pattern="^\d{10}$"
+         [(ngModel)]="model.phone"
+         name="phone"
+         #phone="ngModel"
+         [customValidator]="'phoneNumber'"
+         [ngClass]="{ 'is-invalid': phone.touched && phone.invalid }"
+         />
+
+
+  <!-- DATE OF BIRTH -->
+  <label for="birthday">Date of birth:</label>
+  <input id="birthday"
+         type="date"
+         class="form-control"
+         required
+         [(ngModel)]="model.birthday"
+         name="birthday"
+         #birthday="ngModel"
+         [ngClass]="{ 'is-invalid': birthday.touched && birthday.invalid }"
+         />
+
+
+  <!-- STREET ADDRESS -->
+  <label for="street">Street address:</label>
+  <input id="street"
+         type="text"
+         class="form-control"
+         required
+         [(ngModel)]="model.street"
+         name="street"
+         #street="ngModel"
+         [ngClass]="{ 'is-invalid': street.touched && street.invalid }"
+         />
+
+
+  <!-- PROVINCE -->
+  <label for="province">Province:</label>
+  <select id="province"
+          class="form-control"
+          required
+          [(ngModel)]="model.province"
+          name="province"
+          #province="ngModel"
+          [customValidator]="'provinceSelection'"
+          [ngClass]="{ 'is-invalid': province.touched && province.invalid }"
+          >
+
+    <option value="" disabled selected>Select your province</option>
+    <option *ngFor="let province of provinces" [ngValue]="province">{{ province }}</option>
+  </select>
+
+
+  <!-- COUNTRY -->
+  <label for="country">Country:</label>
+  <select id="country"
+          class="form-control"
+          required
+          [(ngModel)]="model.country"
+          name="country"
+          #country="ngModel"
+          (change)="checkCountry()"
+          [customValidator]="'countrySelection'"
+          [ngClass]="{ 'is-invalid': country.touched && country.invalid }"
+          >
+
+    <option value="" disabled selected>Select your country</option>
+    <option value="Canada">Canada</option>
+    <option value="United States">United States</option>
+  </select>
+
+  <!-- TERMS AND CONDITIONS -->
+  <label>
+    <input type="checkbox"
+           required
+           [(ngModel)]="model.termsAccepted"
+           name="termsAccepted"
+           #termsAccepted="ngModel" />
+    Accept Terms & Conditions
+  </label>
+
+  <!-- SUBMIT BUTTON -->
+  <button type="submit" [disabled]="registerForm.invalid">Submit</button>
+
+  </form>

@@ -1,0 +1,38 @@
+.app-header {
+  height: 200px;
+  border-bottom: 1px solid black;
+}
+
+.app-header::after {
+  content: "";
+  height: 200px;
+  opacity: 0.5;
+  background: url('../../../../assets/images/EMBG2.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  }
+
+.app-logo {
+  height: 100px;
+  margin-left: 120px;
+}
+
+.HeaderHomeButton {
+  font-size: 20px;
+  color: steelblue;
+  margin-left: 20px;
+  padding-bottom: 5px;
+}
+
+.BodyBackground {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+}

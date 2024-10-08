@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Francis Saria</title>
+	<base href="/">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+	<app-root></app-root>
+</body>
+</html>
+
+<!--
+	LOG:
+
+		9/16/2024
+		> Installed node.js and Angular via cmd.
+		> Started everyday-market-ng.
+		> Completed Kaltura session 1.
+		> Deleted everyday-market-ng, re-created it again with the '--no-standalone' tag.
+		> Opened everyday-market-ng on Visual Studio.
+		> Tested ng.serve, localhost worked.
+
+		9/17/2024
+		> Generated CoreModule, SharedModule, and MarketModule.
+		> Generated header component (modules/shared/header).
+		> Updated the header.component.html file.
+		> Updated the header.component.css file.
+		> Added "HeaderComponent" to the module's exports declarable. (shared.module.ts)
+		> Replaced entire app.component.html with the specified content.
+		> Imported SharedModule in app.module.ts with the specified content.
+		> Updated src/styles.css.
+		> Created EMLogoSmall.png via Canva.
+		> Snipped EMBG.png via web. (Source cited below)
+		> Added CommonModule as an import on shared.module.ts.
+		> Deleted the HeaderComponent import on the app.module.ts to resolve error TS-996007. (Multiple HeaderComponent detected)
+		> Created "assets" folder under src.
+		> Instered EMLogoSmall.png and EMBG.png on the assets folder.
+		> When deploying via "ng serve", EMLogoSmall.png only shows as a broken image.
+		> Replaced "glob": "**/*", "input": "public" with "src/favicon.ico", "src/assets" on angular.json, logo image is now working!
+		> Generated and implemented the category-menu-item.
+		> Implemented the category-menu component.
+		> Implemented the products-page component.
+
+		9/18/2024
+		> Added an input in the category menu-related components.
+		> Used the @Output decorator.
+		> Added Injectable services.
+		> Added HttpClient service to load the categories.
+		> Encountered and resolved TS2564.
+		> Encountered and resolved TS2339.
+
+		9/19/2024
+		> Reverted the products-page.components.ts back to its non-https state with hardcoded categories.
+		> Updated the categories to make the page more of a tech webstore.
+		> Adjusted the category-menu-items from horizontal to vertical.
+		> Adjusted category item's margins.
+		> Created EMLogo.png, updated the logo.
+		> Created EMBG2.png, updated the website banner.
+		> Shop tagline hidden for better page look.
+		> Reverted the category-menu-items horizontally, justified to center for a better look.
+		> Updated app.component.css and category-menu-item.component.css to make the categories look even better.
+		> header.component.css: Increased the app-logo size.
+
+		9/27/2024
+		> Modified the title as "Francis Saria".
+
+		9/29/24
+		> Fixed the issue where the product-item tiles are not showing when the user selects a category.
+		> Added the images for the product tiles:
+			• Phone1.png
+			•	Phone2.png
+			• Phone3.png
+			• Tablet1.png
+			• Tablet2.png
+			• Out_of_stock.png
+		> Edited the layout for better UI design.
+		> Created a backup of the working project before starting assignment 3.
+
+		10/1/2024
+		> Started working on assignment 3.
+		> STEP 1: Revisited and created a copy of the everyday-market-ng Angular project for assignment 1.
+		> STEP 2: Created the RegisterPageComponent component in CoreModule.
+			• Created it by entering 'ng generate component core/register-page' on terminal.
+			• Modifed core.module.ts:
+				- Imported the new component.
+				- Declared the new component.
+				- Added as an export.
+			• Modified register-page.component.ts with the necessary components for the user's submission.
+			• Modified register-page.component.html with the ngSubmit code.
+			• Encountered Error: TS-996002, deleted the RegisterPageComponent from app.module.ts.
+			• Encountered Error: NG8002, modified core.module.ts with the following:
+				- import { FormsModule } from '@angular/forms';
+				- imports: [
+					CommonModule,
+					FormsModule
+					],
+		> Created a "Register Now!" button on header.component.html.
+		> Created image "main-areaBG.png", updated background on the main-area.
+
+		10/2/2024
+		> STEP 3: Setting up routes on CoreModule, MarketModule, and app.routing.module.ts.
+			• Routing the "Register Here" button to /register for a clear path for the user.
+				- Created core-routing.module.ts as the routing path for CoreModule.
+				- Encountered Error: TS-996002, moved core.module.ts to src/app/core.
+				- Encountered Error: TS-996007, cleaned up duplicated imports from app.module.ts and core.module.ts.
+			• Modified app-routing.module.ts:
+				- import { RegisterPageComponent } from './core/register-page/register-page.component';
+				- const routes: Routes = [
+					{ path: 'register', component: RegisterPageComponent },
+					];
+				- Encountered an issue where the Register form is not showing up when re-routing to localhost:4200/register, fixed by adding <router-outlet></router-outlet> on the index.html.
+				- Encountered an issue where the Register button is not calling the Register form, moved the Register button to app.component.html instead of the header.
+		> Creating a /home page so that the main page will only show routes to /products or /register.
+			• ng generate component core/home-page
+				- Modified the routing from the home-page to /products or /register by adding buttons asking the user to choose.
+				- Deleted the Register Now button from app.component.html.
+				- Deleted the Product categories from the home-page.
+				- Created a home button on the header.component that links back to the home-page.
+
+		10/3/2024
+		> STEP 4: Updated the registration form with the details provided on the assignment.
+			• Modified the register-page.component.ts to have the following:
+				- Name: string, minimum 5 letters.
+				- Email Address: string, must have valid email format (email@domain.com)
+				- Phone Number: 10-digit number.
+				- Date of Birth: yyyy-mm-dd
+				- Street Address: letters, numbers, or spaces.
+				- Province: dropdown showing Canadian provinces.
+				- Country: dropdown showing the US or Canada, can only proceed if Canada is selected.
+				- T&C Checkbox: must be checked in order to proceed.
+				- Submit button that only enables once all of the conditions above is met.
+		> STEP 5: Validators.
+			• Created a 'validators' folder under the register-page folder.
+			• Created custom-validations.ts, modified it's contents to have custom validations for name, phone number, and country.
+				- Encountered Error: NG8002, resolved by modifying the custom-validators to be imported to register-page.component.html
+			• Encountered an issue where the registration form doesn't turn on the css for solid red even if it was touched/dirty.
+				- Cause of the issue was the name on the css was .invalid, rather than .is-invalid.
+			• Email validator is not working properly to match the email format of email@email.com.
+				- Modified the register-page.component.html's email validation rules to have "pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$""
+			• Final testing to make sure that everything is running smoothly.
+
+		10/4/2024
+		> Cleaning up code as much as I can without breaking the working code.
+		> Modifying UI by cleaning up .css files.
+		> Deleting the error messages to make the code tidy since it was mentioned on the lecture that it is not required.
+
+		10/5/2024
+		> Polished the code as much as I can for better readability.
+		> Edited some of the css to make it look user-friendly.
+
+		10/8/2024
+		> Git init
+
+	SOURCES USED (aside from Robertson's materials):
+
+		Angular Installation Guide (https://angular.dev/installation)
+		Created images are via Canva (https://www.canva.com/)
+		For the snipped image "EverydayMarketBG" (https://www.linkedin.com/pulse/marketplace-its-characteristics-supriya-gulati/)
+		Logo image resolution (https://stackoverflow.com/questions/58433153/how-to-access-the-assets-folder-in-angular-solution-when-having-different-root-l)
+		TS2564 (https://stackoverflow.com/questions/66052132/angular-error-ts2564-property-users-has-no-initializer-and-is-not-definitely)
+		TS2339
+			(https://stackoverflow.com/questions/38324949/error-ts2339-property-x-does-not-exist-on-type-y)
+			(https://github.com/ezolenko/rollup-plugin-typescript2/issues/297)
+		CSS Guide (https://www.w3schools.com/css/)
+		Build Your First Food Website Using ANGULAR (https://www.youtube.com/watch?v=UIWK5_DrZ7w&list=PLpaspowtqj-dlt-C7FvRG42LNRFcXdRDD)
+		Angular | Beginner to Pro #332 - Filtering Products by Category [By Mosh Hamedani] (https://www.youtube.com/watch?v=NwR3KS_3qQE)
+		Forms in Angular - Learning Angular (Part 7) (https://www.youtube.com/watch?v=kWbk-dOJaNQ)
+		Create Registration Form In Angular 14 (https://www.c-sharpcorner.com/blogs/create-registration-form-in-angular-13)
+		Lesson 10: Add routes to the application (https://v17.angular.io/tutorial/first-app/first-app-lesson-10)
+		Add navigation with routing (https://v17.angular.io/tutorial/tour-of-heroes/toh-pt5)
+		Navigate to another page with a button in angular 2 (https://stackoverflow.com/questions/41427405/navigate-to-another-page-with-a-button-in-angular-2)
+		Routing and Navigation in Angular: A Comprehensive Guide (https://codewithpawan.medium.com/routing-and-navigation-in-angular-a-comprehensive-guide-ba87ced73242)
+		Angular Forms and Validation: A Guide to Building Robust Forms (https://flamesintech.medium.com/angular-forms-and-validation-a-guide-to-building-robust-forms-cf0e3fc67061#:~:text=How%20to%20Validate%20Angular%20Forms,extending%20the%20%60Validator%60%20class.)
+		Building a template-driven form (https://v17.angular.io/guide/forms)
+		Validators (https://v17.angular.io/api/forms/Validators)
+		Angular Custom Form Validators: Complete Guide (https://blog.angular-university.io/angular-custom-validators/)
+		NG8002: Unknown attribute or input (https://v17.angular.io/errors/NG8002)
+		change style invalid && touched (https://stackoverflow.com/questions/59860197/change-style-invalid-touched)
+		Angular Reactive Forms: Make Touched and Invalid form fields red (https://stackoverflow.com/questions/76116126/angular-reactive-forms-make-touched-and-invalid-form-fields-red)
+		AngularJS Form Validation (https://www.w3schools.com/angular/angular_validation.asp)
+		How to Validate Emails in Angular (https://mailtrap.io/blog/angular-email-validation/)
+		Introduction to Angular animations (https://angular.dev/guide/animations)
+
+-->
